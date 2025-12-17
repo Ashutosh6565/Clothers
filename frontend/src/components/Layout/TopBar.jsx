@@ -20,7 +20,7 @@ const TopBar = () => {
             </div>
 
             <div className='text-sm text-center flex-grow'>
-                <span>We Ship word wide 1:01 </span>
+                <span>We Ship word wide</span>
             </div>
 
             <div className='text-sm hidden md:block'>
