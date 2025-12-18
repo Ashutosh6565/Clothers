@@ -14,39 +14,39 @@ const NewArrivals = () => {
     setIsDragging(true);
     setStartX(e.pageX - scrollref.current.offsetLeft);
     setScrollLeft(scrollref.current.scrollLeft);
-  }
+  };
   const handleMouseMove = (e) => {
     if (!isDragging) return;
     e.preventDefault();
     const x = e.pageX - scrollref.current.offsetLeft;
-    const walk = x - startX
+    const walk = x - startX;
     scrollref.current.scrollLeft = scrollLeft - walk;
-  }
+  };
   const handleMouseUpOrLeave = () => {
     setIsDragging(false);
-  }   
+  };
   const scroll = (direction) => {
     const scrollAmount = direction === "left" ? -300 : 300;
     scrollref.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
   };
   const updateScrollButtons = () => {
-    const conatiner = scrollref.current;
+    const container = scrollref.current;
 
-    if (conatiner) {
-      const leftScroll = conatiner.scrollLeft;
+    if (container) {
+      const leftScroll = container.scrollLeft;
       const rightScrollable =
-        conatiner.scrollWidth > leftScroll + conatiner.clientWidth;
+        container.scrollWidth > leftScroll + container.clientWidth;
       setCanScrollLeft(leftScroll > 0);
       setCanScrollRight(rightScrollable);
     }
   };
 
   useEffect(() => {
-    const conatiner = scrollref.current;
-    if (conatiner) {
-      conatiner.addEventListener("scroll", updateScrollButtons);
+    const container = scrollref.current;
+    if (container) {
+      container.addEventListener("scroll", updateScrollButtons);
       updateScrollButtons();
-      return () => conatiner.removeEventListener("scroll", updateScrollButtons);
+      return () => container.removeEventListener("scroll", updateScrollButtons);
     }
   });
 
@@ -143,7 +143,7 @@ const NewArrivals = () => {
   ];
   return (
     <section className="py-16 px-4 lg:px-0">
-      <d className="container mx-auto text-center mb-10 relative ">
+      <div className="container mx-auto text-center mb-10 relative ">
         <h2 className="text-3xl font-bold mb-4">Explore New Arrivals</h2>
         <p className="text-lg ">
           Discover the latest styles sstright off the runway, freshly added to
@@ -159,7 +159,6 @@ const NewArrivals = () => {
             className={`p-0 rounded border transition ${
               canScrollLeft
                 ? "bg-white text-black hover:bg-gray-100"
-
                 : "bg-gray-200 text-gray-400 cursor-not-allowed"
             }`}
           >
@@ -179,38 +178,37 @@ const NewArrivals = () => {
             <FiChevronRight className="text-2xl" />
           </button>
         </div>
-</d>
+      </div>
 
-{/* scroll content  */}
-        <div
-          ref={scrollref}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUpOrLeave}
-          onMouseLeave={handleMouseUpOrLeave}
-          className="container  mx-auto mt-10 overflow-scroll ml-2 flex space-x-6 relative"
-        >
-          {newArrivals.map((product) => (
-            <div
-              key={product.id}
-              className="min-w-[100%] sm:min-w-[50%] lg:min-w-[30%] relative"
-            >
-              <img
-                src={product.images[0]?.url}
-                alt={product.images[0]?.altText || product.name}
-                className="w-full h-[400px]  object-cover rounded-lg"
-                draggable="false"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-opacity/50 backdrop-blur-md text-white p-4 rounded-b-lg">
-                <Link to={`/product/${product.id}`} className="block">
-                  <h4 className="font-medium">{product.name}</h4>
-                  <p className="mt-1">${product.price}</p>
-                </Link>
-              </div>
+      {/* scroll content  */}
+      <div
+        ref={scrollref}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUpOrLeave}
+        onMouseLeave={handleMouseUpOrLeave}
+        className="container  mx-auto mt-10 overflow-scroll ml-2 flex space-x-6 relative"
+      >
+        {newArrivals.map((product) => (
+          <div
+            key={product.id}
+            className="min-w-[100%] sm:min-w-[50%] lg:min-w-[30%] relative"
+          >
+            <img
+              src={product.images[0]?.url}
+              alt={product.images[0]?.altText || product.name}
+              className="w-full h-[400px]  object-cover rounded-lg"
+              draggable="false"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-opacity/50 backdrop-blur-md text-white p-4 rounded-b-lg">
+              <Link to={`/product/${product.id}`} className="block">
+                <h4 className="font-medium">{product.name}</h4>
+                <p className="mt-1">${product.price}</p>
+              </Link>
             </div>
-          ))}
-        </div>
-      
+          </div>
+        ))}
+      </div>
     </section>
   );
 };
