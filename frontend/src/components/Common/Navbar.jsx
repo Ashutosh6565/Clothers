@@ -24,7 +24,7 @@ const Navbar = () => {
         </div>
         <div className="hidden md:flex space-x-6">
           <Link
-            to="#"
+            to="/collection/all"
             className="text-gray-700 hover:text-black text-sm font-medium uppercase"
           >
             Men
@@ -83,9 +83,10 @@ const Navbar = () => {
         }`}
       >
         <div className="flex justify-end p-4">
-          <button className={toggleNavDraw}>
-<IoMdClose className="h-6 w-6 text-gray-600" />
-          </button>
+         <button onClick={toggleNavDraw}>
+  <IoMdClose className="h-6 w-6 text-gray-600" />
+</button>
+
           
         </div>
         <div className="p-4">

@@ -22,4 +22,4 @@ const ProductGrid = ({products}) => {
   )
 }
 
-export default ProductGrid
+export default ProductGrid;
